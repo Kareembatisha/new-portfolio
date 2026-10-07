@@ -1,0 +1,97 @@
+@use 'breakpoints' as *;
+
+:host {
+  display: block;
+}
+
+.hero {
+  display: grid;
+  gap: var(--space-7);
+  align-items: center;
+  padding-block: var(--space-8);
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+}
+
+h1 {
+  max-width: 17ch;
+}
+.eyebrow {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.lead {
+  max-width: 38rem;
+  font-size: var(--fs-xl);
+  color: var(--color-text-2);
+}
+.stack {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text-2);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.portrait {
+  display: grid;
+  place-items: center;
+  width: min(100%, 20rem);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: transform var(--t-base) var(--ease);
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+// Staggered entrance. Plain CSS, runs once; the global reduced-motion rule shortens it to nothing.
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+.copy > * {
+  animation: rise 650ms var(--ease) both;
+}
+.copy > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.copy > :nth-child(3) {
+  animation-delay: 160ms;
+}
+.copy > :nth-child(4) {
+  animation-delay: 220ms;
+}
+.copy > :nth-child(5) {
+  animation-delay: 280ms;
+}
+.portrait {
+  animation: rise 800ms var(--ease) 200ms both;
+}
+
+@media (min-width: $bp-md) {
+  .hero {
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-8);
+    padding-block: var(--space-9);
+  }
+  .portrait {
+    justify-self: end;
+    width: 100%;
+    max-width: 24rem;
+  }
+}

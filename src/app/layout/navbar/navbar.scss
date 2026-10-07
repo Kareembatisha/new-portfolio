@@ -1,0 +1,131 @@
+@use 'breakpoints' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  transition: transform var(--t-base) var(--ease);
+
+  &.is-hidden {
+    transform: translateY(-100%);
+  }
+}
+
+.header__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--header-h);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.menu-btn {
+  min-height: var(--tap-min);
+  padding-inline: var(--space-4);
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+// Mobile: a disclosure panel under the header. visibility:hidden keeps closed links out of the tab order.
+.panel {
+  position: absolute;
+  inset-inline: calc(-1 * var(--gutter));
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--gutter) var(--space-6);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  transition:
+    opacity var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease),
+    visibility 0s var(--t-base);
+
+  &.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+}
+
+.links,
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.actions {
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding-inline: var(--space-3);
+  color: var(--color-text-2);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  transition: color var(--t-fast) var(--ease);
+
+  &:hover,
+  &.is-active {
+    color: var(--color-text);
+  }
+  &.is-active {
+    background: var(--color-accent-soft);
+  }
+}
+
+@media (min-width: $bp-md) {
+  .menu-btn {
+    display: none;
+  }
+
+  .panel {
+    position: static;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    border: 0;
+    background: none;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .links,
+  .actions {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .links {
+    margin-inline-start: var(--space-6);
+  }
+}

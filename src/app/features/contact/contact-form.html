@@ -1,0 +1,87 @@
+<form
+  class="form"
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  novalidate
+  (submit)="submit($event)"
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="visually-hidden" aria-hidden="true">
+    <label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div class="field">
+    <label for="contact-name">{{ i18n.t('contact.name') }}</label>
+    <input
+      id="contact-name"
+      name="name"
+      type="text"
+      autocomplete="name"
+      [value]="name()"
+      (input)="name.set(value($event))"
+      [attr.aria-invalid]="errors().name ? 'true' : null"
+      [attr.aria-describedby]="errors().name ? 'contact-name-error' : null"
+    />
+    @if (errors().name; as error) {
+      <p class="error" id="contact-name-error">{{ i18n.t(error) }}</p>
+    }
+  </div>
+
+  <div class="field">
+    <label for="contact-email">{{ i18n.t('contact.email') }}</label>
+    <input
+      id="contact-email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      dir="ltr"
+      [value]="email()"
+      (input)="email.set(value($event))"
+      [attr.aria-invalid]="errors().email ? 'true' : null"
+      [attr.aria-describedby]="errors().email ? 'contact-email-error' : null"
+    />
+    @if (errors().email; as error) {
+      <p class="error" id="contact-email-error">{{ i18n.t(error) }}</p>
+    }
+  </div>
+
+  <div class="field">
+    <label for="contact-details">{{ i18n.t('contact.details') }}</label>
+    <textarea
+      id="contact-details"
+      name="details"
+      rows="6"
+      [value]="details()"
+      (input)="details.set(value($event))"
+      [attr.aria-invalid]="errors().details ? 'true' : null"
+      [attr.aria-describedby]="errors().details ? 'contact-details-error' : null"
+    ></textarea>
+    @if (errors().details; as error) {
+      <p class="error" id="contact-details-error">{{ i18n.t(error) }}</p>
+    }
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn btn--primary">{{ i18n.t('contact.send.whatsapp') }}</button>
+    <button type="button" class="btn btn--secondary" (click)="send('email')">
+      {{ i18n.t('contact.send.email') }}
+    </button>
+  </div>
+  <p class="hint">{{ i18n.t('contact.hint') }}</p>
+
+  @if (prepared(); as message) {
+    <div class="ready" role="status">
+      <p class="ready__title">{{ i18n.t('contact.ready.title') }}</p>
+      <p class="ready__body">{{ i18n.t('contact.ready.body') }}</p>
+      <pre class="ready__message" tabindex="0">{{ message }}</pre>
+      <button type="button" class="btn btn--secondary" (click)="copy()">
+        {{ copyState() === 'copied' ? i18n.t('contact.copied') : i18n.t('contact.copy') }}
+      </button>
+      @if (copyState() === 'failed') {
+        <p class="error">{{ i18n.t('contact.copy.error') }}</p>
+      }
+    </div>
+  }
+</form>

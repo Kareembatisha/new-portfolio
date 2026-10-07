@@ -1,0 +1,57 @@
+<section class="container intro">
+  <p class="role">{{ i18n.t('about.role') }}</p>
+  <h1>{{ i18n.t('page.about') }}</h1>
+  <p class="lead">{{ i18n.t('home.about.body') }}</p>
+  <a class="btn btn--secondary" [href]="cv" download>{{ i18n.t('nav.cv') }}</a>
+</section>
+
+<div class="container">
+  <section class="split">
+    <h2>{{ i18n.t('about.approach') }}</h2>
+    <ul class="approach">
+      @for (item of approach; track $index) {
+        <li class="surface">
+          <h3>{{ i18n.l(item.title) }}</h3>
+          <p>{{ i18n.l(item.text) }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="split">
+    <h2>{{ i18n.t('about.experience') }}</h2>
+    <app-timeline [items]="experience" />
+  </section>
+
+  <section class="split">
+    <h2>{{ i18n.t('about.focus') }}</h2>
+    <dl class="skills">
+      @for (group of skills; track $index) {
+        <div>
+          <dt>{{ i18n.l(group.title) }}</dt>
+          <dd>{{ group.items.join(' · ') }}</dd>
+        </div>
+      }
+    </dl>
+  </section>
+
+  <section class="split">
+    <h2>{{ i18n.t('about.collab') }}</h2>
+    <p class="text">{{ i18n.t('about.collab.body') }}</p>
+  </section>
+
+  <section class="split">
+    <h2>{{ i18n.t('about.education') }}</h2>
+    <ul class="edu">
+      @for (item of education; track $index) {
+        <li class="surface">
+          <p class="period">{{ i18n.l(item.period) }}</p>
+          <h3>{{ i18n.l(item.title) }}</h3>
+          <p>{{ i18n.l(item.institution) }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+</div>
+
+<app-cta-section [title]="i18n.t('cta.title')" [lead]="i18n.t('cta.lead')" />

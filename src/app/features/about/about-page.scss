@@ -1,0 +1,69 @@
+@use 'breakpoints' as *;
+
+.intro {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  padding-block: var(--space-8) var(--space-6);
+}
+.role {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.lead {
+  max-width: 46rem;
+  font-size: var(--fs-lg);
+  color: var(--color-text-2);
+}
+
+h3 {
+  font-size: var(--fs-lg);
+}
+p {
+  color: var(--color-text-2);
+}
+
+.approach,
+.edu {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+    padding: var(--space-5);
+  }
+}
+.period {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.skills {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+
+  dt {
+    font-weight: 600;
+  }
+  dd {
+    margin: var(--space-1) 0 0;
+    color: var(--color-text-2);
+    unicode-bidi: plaintext;
+  }
+}
+.text {
+  max-width: 46rem;
+}
+
+@media (min-width: $bp-md) {
+  .approach {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

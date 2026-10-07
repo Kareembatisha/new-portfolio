@@ -1,0 +1,19 @@
+<article class="card" [class.card--lead]="variant() === 'lead'" [class.card--compact]="variant() === 'compact'">
+  @if (variant() !== 'compact') {
+    <app-project-media [project]="project()" [transitionName]="'project-' + project().slug" />
+  }
+
+  <div class="body">
+    <p class="category">{{ i18n.l(project().category) }}</p>
+    <h3 class="title">
+      <a class="link" [routerLink]="['/', i18n.lang(), 'work', project().slug]">{{ project().title }}</a>
+    </h3>
+    <p class="summary">{{ i18n.l(project().summary) }}</p>
+    <ul class="tags">
+      @for (tag of project().stack; track tag) {
+        <li>{{ tag }}</li>
+      }
+    </ul>
+    <span class="cta" aria-hidden="true">{{ i18n.t('card.cta') }} <span class="flip-rtl">→</span></span>
+  </div>
+</article>

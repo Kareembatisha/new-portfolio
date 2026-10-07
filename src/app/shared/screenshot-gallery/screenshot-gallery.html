@@ -1,0 +1,52 @@
+<ul class="grid" appReveal stagger>
+  @for (item of items(); track item.src; let i = $index) {
+    <li>
+      <button
+        type="button"
+        class="thumb"
+        aria-haspopup="dialog"
+        [attr.aria-label]="i18n.t('gallery.open') + ': ' + i18n.l(item.caption)"
+        (click)="open(i, $event)"
+      >
+        <span class="thumb__image">
+          <app-responsive-image
+            [image]="item"
+            [alt]="i18n.l(item.alt)"
+            sizes="(min-width: 56rem) 360px, 50vw"
+          />
+        </span>
+        <span class="thumb__caption">{{ i18n.l(item.caption) }}</span>
+      </button>
+    </li>
+  }
+</ul>
+
+<dialog
+  #dialog
+  class="lightbox"
+  [attr.aria-label]="i18n.t('gallery.title')"
+  (close)="onClosed()"
+  (click)="onBackdrop($event)"
+  (keydown)="onKey($event)"
+>
+  @if (current(); as item) {
+    <div class="lightbox__body">
+      <div class="lightbox__image" [style.--ratio]="item.width / item.height">
+        <app-responsive-image [image]="item" [alt]="i18n.l(item.alt)" sizes="100vw" [priority]="true" />
+      </div>
+      <p class="lightbox__caption">{{ i18n.l(item.caption) }}</p>
+      <div class="lightbox__bar">
+        <button type="button" class="nav" (click)="step(-1)" [attr.aria-label]="i18n.t('gallery.prev')">
+          <span class="flip-rtl" aria-hidden="true">←</span>
+        </button>
+        <span class="count" aria-live="polite">{{ position() }}</span>
+        <button type="button" class="nav" (click)="step(1)" [attr.aria-label]="i18n.t('gallery.next')">
+          <span class="flip-rtl" aria-hidden="true">→</span>
+        </button>
+        <button type="button" class="nav close" (click)="close()" [attr.aria-label]="i18n.t('gallery.close')">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+    </div>
+  }
+</dialog>

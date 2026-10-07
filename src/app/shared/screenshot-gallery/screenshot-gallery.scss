@@ -1,0 +1,119 @@
+:host {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.thumb {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  background: none;
+  border: 0;
+  cursor: zoom-in;
+}
+.thumb__image {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease);
+}
+.thumb:hover .thumb__image {
+  border-color: var(--color-text-2);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.thumb__caption {
+  font-size: var(--fs-sm);
+  color: var(--color-text-2);
+}
+
+// ---- Lightbox ----
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+.lightbox {
+  width: min(96vw, 80rem);
+  max-width: none;
+  max-height: 96vh;
+  margin: auto;
+  padding: var(--space-4);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 0;
+  border-radius: var(--radius-lg);
+  overflow: auto;
+  animation: lightbox-in 220ms var(--ease);
+}
+.lightbox::backdrop {
+  background: rgb(15 23 42 / 0.72);
+}
+.lightbox__body {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: center;
+}
+// Size the frame from the image's own ratio so nothing is cropped and it never exceeds the viewport height.
+.lightbox__image {
+  width: min(100%, calc(70vh * var(--ratio)));
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.lightbox__caption {
+  max-width: 60rem;
+  text-align: center;
+  color: var(--color-text-2);
+}
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.count {
+  min-width: 4.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+}
+.nav {
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  font: inherit;
+  font-size: var(--fs-lg);
+  color: inherit;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease);
+}
+.nav:hover {
+  background: var(--color-accent-soft);
+}
+.close {
+  margin-inline-start: var(--space-3);
+}

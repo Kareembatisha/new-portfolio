@@ -1,0 +1,141 @@
+.hero {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  padding-block: var(--space-7) var(--space-6);
+}
+.back {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  font-weight: 600;
+  color: var(--color-text-2);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-text);
+  }
+}
+.category {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+h1 {
+  font-size: var(--fs-h2);
+}
+.lead {
+  max-width: 44rem;
+  font-size: var(--fs-xl);
+  color: var(--color-text-2);
+}
+.hero-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  // A real screenshot keeps its own proportions instead of being cropped to 16:9.
+  &.has-cover {
+    aspect-ratio: auto;
+  }
+}
+
+.content {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 46rem;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-2);
+  list-style: none;
+}
+.meta strong {
+  color: var(--color-text);
+}
+
+.list {
+  gap: var(--space-3);
+
+  li {
+    position: relative;
+    padding-inline-start: var(--space-5);
+  }
+  li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0.7em;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+}
+
+.details details {
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+summary {
+  min-height: var(--tap-min);
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+}
+details p {
+  padding-block-end: var(--space-2);
+}
+
+.stack li {
+  display: grid;
+  gap: var(--space-1);
+}
+.stack h3 {
+  font-size: var(--fs-base);
+  color: var(--color-text);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+
+  li {
+    direction: ltr;
+    unicode-bidi: isolate;
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+  }
+}
+
+.next__link {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  text-decoration: none;
+  transition: border-color var(--t-base) var(--ease);
+
+  &:hover {
+    border-color: var(--color-text-2);
+  }
+}
+.next__category {
+  font-size: var(--fs-sm);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.next__title {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+

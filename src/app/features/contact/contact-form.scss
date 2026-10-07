@@ -1,0 +1,104 @@
+:host {
+  display: block;
+}
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+label {
+  font-weight: 600;
+}
+input,
+textarea {
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: var(--space-3) var(--space-4);
+  font: inherit;
+  color: inherit;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--t-fast) var(--ease);
+
+  &:hover {
+    border-color: var(--color-text-2);
+  }
+  &[aria-invalid='true'] {
+    border-color: var(--color-error);
+  }
+}
+textarea {
+  resize: vertical;
+}
+.error {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-error);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.hint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-2);
+}
+
+// Validation cue: a short, gentle shake when a field turns invalid (reduced-motion users get none).
+@keyframes nudge {
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+input[aria-invalid='true'],
+textarea[aria-invalid='true'] {
+  animation: nudge 280ms var(--ease) 1;
+}
+.error {
+  animation: fade-up 250ms var(--ease) both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+}
+
+// Success state
+.ready {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  padding: var(--space-5);
+  background: var(--color-accent-soft);
+  border-radius: var(--radius-md);
+  animation: fade-up 400ms var(--ease) both;
+}
+.ready__title {
+  font-weight: 700;
+}
+.ready__body {
+  font-size: var(--fs-sm);
+  color: var(--color-text-2);
+}
+.ready__message {
+  width: 100%;
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  font: inherit;
+  font-size: var(--fs-sm);
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}

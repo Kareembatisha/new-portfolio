@@ -1,0 +1,66 @@
+// Design tokens. Change --color-accent* to re-theme the whole site.
+:root {
+  // Color
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-2: #475569;
+  --color-border: #e2e8f0;
+  --color-accent: #3a47d5;
+  --color-accent-hover: #2d38b3;
+  --color-accent-soft: #eef0ff;
+  --color-on-accent: #ffffff;
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-error: #b91c1c;
+
+  // Typography
+  --font-sans: 'Inter', 'Cairo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-h2: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem);
+  --fs-h1: clamp(2.25rem, 1.4rem + 4vw, 4.25rem);
+  --lh-body: 1.65;
+  --lh-heading: 1.1;
+
+  // Spacing (4px base)
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  // Shape & depth
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 8px 24px rgb(15 23 42 / 0.08);
+
+  // Layout
+  --container: 72rem;
+  --container-narrow: 46rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-h: 4rem;
+  --tap-min: 2.75rem;
+
+  // Motion & stacking
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 150ms;
+  --t-base: 250ms;
+  --z-header: 100;
+  --z-skip: 200;
+}
+
+:lang(ar) {
+  --lh-body: 1.85;
+  --lh-heading: 1.35;
+}

@@ -1,0 +1,60 @@
+<section class="container intro">
+  <h1>{{ i18n.t('page.services') }}</h1>
+  <p class="lead">{{ i18n.t('services.lead') }}</p>
+</section>
+
+<div class="container">
+  @for (item of services; track item.service.id) {
+    <section class="split" [id]="item.service.id">
+      <h2>{{ i18n.l(item.service.title) }}</h2>
+      <div class="body">
+        <p class="summary">{{ i18n.l(item.service.summary) }}</p>
+
+        <div class="cols">
+          <div>
+            <h3>{{ i18n.t('services.forwho') }}</h3>
+            <p>{{ i18n.l(item.detail.forWho) }}</p>
+          </div>
+          <div>
+            <h3>{{ i18n.t('services.included') }}</h3>
+            <ul class="bullets">
+              @for (entry of item.detail.included; track $index) {
+                <li>{{ i18n.l(entry) }}</li>
+              }
+            </ul>
+          </div>
+          <div>
+            <h3>{{ i18n.t('services.challenges') }}</h3>
+            <ul class="bullets">
+              @for (entry of item.detail.challenges; track $index) {
+                <li>{{ i18n.l(entry) }}</li>
+              }
+            </ul>
+          </div>
+          <div>
+            <h3>{{ i18n.t('services.projects') }}</h3>
+            <ul class="links">
+              @for (project of item.projects; track project.slug) {
+                <li>
+                  <a [routerLink]="['/', i18n.lang(), 'work', project.slug]">{{ project.title }}</a>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        <ul class="tags" [attr.aria-label]="i18n.t('services.tech')">
+          @for (tag of item.detail.stack; track tag) {
+            <li>{{ tag }}</li>
+          }
+        </ul>
+
+        <a class="btn btn--secondary quote" [routerLink]="['/', i18n.lang(), 'contact']">{{
+          i18n.t('services.quote')
+        }}</a>
+      </div>
+    </section>
+  }
+</div>
+
+<app-cta-section [title]="i18n.t('services.cta.title')" [lead]="i18n.t('services.cta.lead')" />

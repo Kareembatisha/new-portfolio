@@ -1,0 +1,170 @@
+<article>
+  <header class="container hero">
+    <a class="back" [routerLink]="['/', i18n.lang(), 'work']"
+      ><span class="flip-rtl">←</span> {{ i18n.t('cs.back') }}</a
+    >
+    <p class="category">{{ i18n.l(project().category) }}</p>
+    <h1>{{ project().title }}</h1>
+    <p class="lead">{{ i18n.l(project().summary) }}</p>
+    <app-project-media
+      class="hero-media"
+      [class.has-cover]="project().cover"
+      [project]="project()"
+      [transitionName]="'project-' + project().slug"
+      sizes="(min-width: 75rem) 1152px, 100vw"
+      [priority]="true"
+    />
+  </header>
+
+  <div class="container">
+    <section class="split">
+      <h2>{{ i18n.t('cs.overview') }}</h2>
+      <div class="content">
+        <p>{{ i18n.l(study().overview) }}</p>
+        @if (study().client; as client) {
+          <p class="meta">
+            <strong>{{ i18n.t('cs.client') }}:</strong> {{ i18n.l(client) }}
+          </p>
+        }
+      </div>
+    </section>
+
+    @if (study().problem; as problem) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.problem') }}</h2>
+        <div class="content">
+          <p>{{ i18n.l(problem) }}</p>
+        </div>
+      </section>
+    }
+
+    <section class="split">
+      <h2>{{ i18n.t('cs.role') }}</h2>
+      <div class="content">
+        <p>{{ i18n.l(study().role) }}</p>
+      </div>
+    </section>
+
+    <section class="split">
+      <h2>{{ i18n.t('cs.features') }}</h2>
+      <ul class="content list">
+        @for (feature of study().features; track $index) {
+          <li>{{ i18n.l(feature) }}</li>
+        }
+      </ul>
+    </section>
+
+    @if (study().gallery; as gallery) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.gallery') }}</h2>
+        <app-screenshot-gallery class="content" [items]="gallery" />
+      </section>
+    }
+
+    @if (study().architecture; as architecture) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.architecture') }}</h2>
+        <app-architecture-diagram class="content" [architecture]="architecture" />
+      </section>
+    }
+
+    @if (study().deepDive; as items) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.deepdive') }}</h2>
+        <div class="content details">
+          @for (item of items; track $index) {
+            <details>
+              <summary>{{ i18n.l(item.title) }}</summary>
+              <p>{{ i18n.l(item.text) }}</p>
+            </details>
+          }
+        </div>
+      </section>
+    }
+
+    @if (study().challenges; as items) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.challenges') }}</h2>
+        <ul class="content stack">
+          @for (item of items; track $index) {
+            <li>
+              <h3>{{ i18n.l(item.title) }}</h3>
+              <p>{{ i18n.l(item.text) }}</p>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    @if (study().scrollPreview; as preview) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.preview') }}</h2>
+        <app-scroll-preview
+          class="content"
+          [image]="preview.image"
+          [alt]="i18n.l(preview.alt)"
+          [caption]="i18n.l(preview.caption)"
+        />
+      </section>
+    }
+
+    @if (study().compare; as compare) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.compare') }}</h2>
+        <app-before-after
+          class="content"
+          [before]="compare.before"
+          [after]="compare.after"
+          [beforeAlt]="i18n.l(compare.beforeAlt)"
+          [afterAlt]="i18n.l(compare.afterAlt)"
+          [beforeLabel]="i18n.l(compare.beforeLabel)"
+          [afterLabel]="i18n.l(compare.afterLabel)"
+          [caption]="i18n.l(compare.caption)"
+        />
+      </section>
+    }
+
+    @if (study().testing; as testing) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.testing') }}</h2>
+        <div class="content">
+          <p>{{ i18n.l(testing) }}</p>
+        </div>
+      </section>
+    }
+
+    @if (study().outcomes; as outcomes) {
+      <section class="split">
+        <h2>{{ i18n.t('cs.outcomes') }}</h2>
+        <ul class="content list">
+          @for (outcome of outcomes; track $index) {
+            <li>{{ i18n.l(outcome) }}</li>
+          }
+        </ul>
+      </section>
+    }
+
+    <section class="split">
+      <h2>{{ i18n.t('cs.stack') }}</h2>
+      <ul class="content tags">
+        @for (tag of project().stack; track tag) {
+          <li>{{ tag }}</li>
+        }
+      </ul>
+    </section>
+
+    <nav class="split next" [attr.aria-label]="i18n.t('cs.next')">
+      <h2>{{ i18n.t('cs.next') }}</h2>
+      <a class="content next__link surface" [routerLink]="['/', i18n.lang(), 'work', next().slug]">
+        <span class="next__category">{{ i18n.l(next().category) }}</span>
+        <span class="next__title">{{ next().title }} <span class="flip-rtl">→</span></span>
+      </a>
+    </nav>
+  </div>
+</article>
+
+<app-cta-section
+  [title]="i18n.t('cs.cta.title')"
+  [lead]="i18n.t('cs.cta.lead')"
+  [primaryLabel]="i18n.t('cs.cta.primary')"
+/>

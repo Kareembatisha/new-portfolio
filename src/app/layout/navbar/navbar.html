@@ -1,0 +1,42 @@
+<header class="header" [class.is-hidden]="hidden()" (focusin)="hidden.set(false)">
+  <div class="container header__inner">
+    <a class="brand" [routerLink]="['/', i18n.lang()]">{{ i18n.t('brand.name') }}</a>
+
+    <button
+      #menuButton
+      type="button"
+      class="menu-btn"
+      aria-controls="site-nav"
+      [attr.aria-expanded]="open()"
+      (click)="toggle()"
+    >
+      {{ i18n.t('nav.menu') }}
+    </button>
+
+    <div id="site-nav" class="panel" [class.is-open]="open()">
+      <nav [attr.aria-label]="i18n.t('nav.primary')">
+        <ul class="links">
+          @for (item of items; track item.path) {
+            <li>
+              <a
+                class="link"
+                [routerLink]="['/', i18n.lang(), item.path]"
+                routerLinkActive="is-active"
+                ariaCurrentWhenActive="page"
+                >{{ i18n.t(item.label) }}</a
+              >
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <div class="actions">
+        <app-language-switcher />
+        <a class="link" [href]="cv" download>{{ i18n.t('nav.cv') }}</a>
+        <a class="btn btn--primary" [routerLink]="['/', i18n.lang(), 'contact']">{{
+          i18n.t('nav.cta')
+        }}</a>
+      </div>
+    </div>
+  </div>
+</header>
